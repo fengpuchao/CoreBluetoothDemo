@@ -25,14 +25,14 @@
     
     [CoreBluetoothManage sharedManage].delegate = self;
     
-    self.textView = [[UITextView alloc]initWithFrame:CGRectMake(10, self.view.frame.origin.x + self.view.frame.size.height - 480, self.view.frame.size.width / 2, 450)];
+    self.textView = [[UITextView alloc]initWithFrame:CGRectMake(10, self.view.frame.origin.y + self.view.frame.size.height/2 + 10, self.view.frame.size.width / 2, self.view.frame.size.height/2 - 20)];
     self.textView.backgroundColor = [UIColor orangeColor];
     self.textView.editable = false;
     [self.view addSubview:self.textView];
     
     self.dataArray = [NSMutableArray array];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 500) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, (self.view.frame.origin.y + self.view.frame.size.height / 2) - (self.view.frame.size.height/2), self.view.frame.size.width,self.view.frame.size.height/2) style:UITableViewStylePlain];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellForRowAtIndexPath"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
