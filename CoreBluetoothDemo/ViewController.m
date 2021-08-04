@@ -68,6 +68,10 @@
     self.textView.text = str;
 }
 
+- (void)pushDevInfo{
+    [SVProgressHUD showSuccessWithStatus:@"数据写入成功,请在调试工具查看。"];
+}
+
 - (void)devCoreBluetoothLists:(nonnull NSMutableArray *)devsArray {
     [SVProgressHUD showWithStatus:@"设备搜索中..."];
     [self.dataArray addObjectsFromArray:devsArray];
