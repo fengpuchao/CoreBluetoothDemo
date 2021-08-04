@@ -140,14 +140,14 @@ static CoreBluetoothManage *__coreBluetoothManage;
             if ([peripheral name] != nil) {
                 
                 [self.deviceDic setObject:peripheral forKey:[peripheral name]];
-                
-                    NSMutableArray *array = [NSMutableArray array];
-                    [self.deviceDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                        if ([key isEqual:[peripheral name]]){
-                            CBPeripheral *peripheral = obj;
-                            [array addObject:peripheral];
-                        }
-                    }];
+
+                NSMutableArray *array = [NSMutableArray array];
+                [self.deviceDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                    if ([key isEqual:[peripheral name]]){
+                        CBPeripheral *peripheral = obj;
+                        [array addObject:peripheral];
+                    }
+                }];
 
                 if ([self.delegate respondsToSelector:@selector(devCoreBluetoothLists:)]) {
                     [self.delegate devCoreBluetoothLists:array];
