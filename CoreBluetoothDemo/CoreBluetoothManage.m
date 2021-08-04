@@ -149,6 +149,9 @@ static CoreBluetoothManage *__coreBluetoothManage;
                     }
                 }];
 
+                
+                
+                
                 if ([self.delegate respondsToSelector:@selector(devCoreBluetoothLists:)]) {
                     [self.delegate devCoreBluetoothLists:array];
                 }
