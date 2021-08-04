@@ -69,12 +69,15 @@
 }
 
 - (void)devCoreBluetoothLists:(nonnull NSMutableArray *)devsArray {
+
     [SVProgressHUD showWithStatus:@"设备搜索中..."];
     [self.dataArray addObjectsFromArray:devsArray];
     [self.tableView reloadData];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [SVProgressHUD dismiss];
     });
+    
+    NSLog(@"%@",self.dataArray);
 }
 
 - (void)devDidConnectPeripheral:(nonnull CBPeripheral *)peripheral {
@@ -82,9 +85,10 @@
 }
 
 - (void)devDidDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
-    [SVProgressHUD showErrorWithStatus:@"连接断开，正在尝试重新连接中...."];
-    [[CoreBluetoothManage sharedManage]connectDeviceWithPeripheral:peripheral];
+    [self.dataArray removeAllObjects];
     [self.tableView reloadData];
+    
+    [SVProgressHUD showErrorWithStatus:@"连接断开，正在尝试重新连接中...."];
 }
 
 - (void)devDidFailToConnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nonnull NSError *)error {

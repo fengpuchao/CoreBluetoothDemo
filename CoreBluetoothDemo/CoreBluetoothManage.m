@@ -101,6 +101,8 @@ static CoreBluetoothManage *__coreBluetoothManage;
 
 #pragma mark 设备连接断开
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    [self.deviceDic removeAllObjects];
+
     [self.centralManager scanForPeripheralsWithServices:NULL options:NULL]; //重新进入扫描状态
     
     if ([self.delegate respondsToSelector:@selector(devDidDisconnectPeripheral:error:)]) {
@@ -114,7 +116,7 @@ static CoreBluetoothManage *__coreBluetoothManage;
     
     [central stopScan];
 
-    [peripheral discoverServices:nil];
+    [peripheral discoverServices:NULL];
     
     if ([self.delegate respondsToSelector:@selector(devDidConnectPeripheral:)]) {
         [self.delegate devDidConnectPeripheral:peripheral];
