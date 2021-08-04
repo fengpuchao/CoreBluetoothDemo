@@ -69,15 +69,12 @@
 }
 
 - (void)devCoreBluetoothLists:(nonnull NSMutableArray *)devsArray {
-
     [SVProgressHUD showWithStatus:@"设备搜索中..."];
     [self.dataArray addObjectsFromArray:devsArray];
     [self.tableView reloadData];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [SVProgressHUD dismiss];
-    });
-    
-    NSLog(@"%@",self.dataArray);
+    });    
 }
 
 - (void)devDidConnectPeripheral:(nonnull CBPeripheral *)peripheral {

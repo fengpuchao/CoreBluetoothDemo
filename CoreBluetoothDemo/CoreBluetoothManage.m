@@ -11,11 +11,9 @@
 @property (nonatomic, strong) NSMutableDictionary *deviceDic;
 @property (nonatomic, strong) NSMutableArray *writeArray;
 
-
 @property (nonatomic, strong) CBPeripheral *peripheral;
 @property (nonatomic, strong) CBCentralManager *centralManager;
 @property (nonatomic, strong) CBCharacteristic *characteristic;
-
 
 @end
 
@@ -41,15 +39,18 @@ static CoreBluetoothManage *__coreBluetoothManage;
 
 #pragma mark - 获取值
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
-    NSLog(@"收到数据 = %@",characteristic.value);
     if ([self.delegate respondsToSelector:@selector(getPeripheral:)]) {
         [self.delegate getPeripheral:characteristic.value];
     }
+    NSLog(@"收到数据 = %@",characteristic.value);
 }
 
 #pragma mark 数据写入成功回调
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
-     NSLog(@"数据写入成功");
+    if ([self.delegate respondsToSelector:@selector(pushDevInfo)]) {
+        [self.delegate pushDevInfo];
+    }
+    NSLog(@"数据写入成功");
 }
 
 #pragma mark 数据写入
