@@ -9,7 +9,7 @@
 @interface CoreBluetoothManage ()<CBCentralManagerDelegate,CBPeripheralDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *deviceDic;
-@property (nonatomic, strong) NSMutableArray *writeArray;
+@property (nonatomic, strong) NSMutableArray <CBCharacteristic *>*characteristicArray;
 
 @property (nonatomic, strong) CBPeripheral *peripheral;
 @property (nonatomic, strong) CBCentralManager *centralManager;
@@ -32,7 +32,7 @@ static CoreBluetoothManage *__coreBluetoothManage;
     if ([super init]) {
         _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         _deviceDic = [[NSMutableDictionary alloc]init];
-        _writeArray = [NSMutableArray array];
+        _characteristicArray = [NSMutableArray array];
     }
     return self;
 }
@@ -50,47 +50,35 @@ static CoreBluetoothManage *__coreBluetoothManage;
     if ([self.delegate respondsToSelector:@selector(pushDevInfo)]) {
         [self.delegate pushDevInfo];
     }
-    NSLog(@"数据写入成功");
+    NSLog(@"数据写入 = %@",characteristic.value);
 }
 
 #pragma mark 数据写入
 - (void)writeDataInfo:(NSString *)info{
-    if (self.characteristic.properties && CBCharacteristicPropertyWrite) {
-        NSData *data = [info dataUsingEncoding:NSUTF8StringEncoding];
-        [self.peripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
-    }else{
-        NSLog(@"该字段不可写！");
-    }
+    __weak typeof(self)weakSelf = self;
+    [self.characteristicArray enumerateObjectsUsingBlock:^(CBCharacteristic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSData *data = [info dataUsingEncoding:NSUTF8StringEncoding];
+            [weakSelf.peripheral writeValue:data forCharacteristic:obj type:CBCharacteristicWriteWithResponse];
+    }];
 }
 
 #pragma mark 发现特征回调
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
     self.peripheral = peripheral;
-    self.characteristic = service.characteristics.lastObject;
-    [peripheral setNotifyValue:true forCharacteristic:self.characteristic]; //接收
-    
-    __weak typeof(self)weakSelf = self;
     [service.characteristics enumerateObjectsUsingBlock:^(CBCharacteristic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.value == nil) {
-            [peripheral setNotifyValue:true forCharacteristic:obj]; //发送
-            weakSelf.characteristic = obj;
-        }
+        [peripheral setNotifyValue:true forCharacteristic:obj];
     }];
+    
+    [self.characteristicArray addObjectsFromArray:service.characteristics];
 }
 
 #pragma mark 发现服务回调
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
-//    __block CBService * __nullable findService = nil;
     [peripheral.services enumerateObjectsUsingBlock:^(CBService * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        findService = obj;
         if (obj) {
             [peripheral discoverCharacteristics:NULL forService:obj];
         }
     }];
-    
-//    if (findService){
-//        [peripheral discoverCharacteristics:NULL forService:findService];
-//    }
 }
 
 #pragma mark 连接失败
