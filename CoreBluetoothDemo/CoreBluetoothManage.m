@@ -50,15 +50,15 @@ static CoreBluetoothManage *__coreBluetoothManage;
     if ([self.delegate respondsToSelector:@selector(pushDevInfo)]) {
         [self.delegate pushDevInfo];
     }
-    NSLog(@"数据写入 = %@",characteristic.value);
+    NSLog(@"数据写入");
 }
 
 #pragma mark 数据写入
 - (void)writeDataInfo:(NSString *)info{
     __weak typeof(self)weakSelf = self;
     [self.characteristicArray enumerateObjectsUsingBlock:^(CBCharacteristic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSData *data = [info dataUsingEncoding:NSUTF8StringEncoding];
-            [weakSelf.peripheral writeValue:data forCharacteristic:obj type:CBCharacteristicWriteWithResponse];
+        NSData *data = [info dataUsingEncoding:NSUTF8StringEncoding];
+        [weakSelf.peripheral writeValue:data forCharacteristic:obj type:CBCharacteristicWriteWithResponse];
     }];
 }
 
