@@ -31,7 +31,7 @@ static CoreBluetoothManage *__coreBluetoothManage;
 
 - (instancetype)init{
     if ([super init]) {
-        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()options:nil];
         _deviceDic = [[NSMutableDictionary alloc]init];
         _characteristicArray = [NSMutableArray array];
     }
@@ -113,7 +113,6 @@ static CoreBluetoothManage *__coreBluetoothManage;
     if ([self.delegate respondsToSelector:@selector(devDidConnectPeripheral:)]) {
         [self.delegate devDidConnectPeripheral:peripheral];
     }
-    NSLog(@"连接到名称为（%@）的设备-成功",peripheral.name);
 }
 
 #pragma mark 发现外设
@@ -180,6 +179,21 @@ static CoreBluetoothManage *__coreBluetoothManage;
     }
 }
 
+#pragma mark 停止扫描
+- (void)stopScanBluetooth{
+    [self.centralManager stopScan];
+}
+
+#pragma mark 取消连接蓝牙
+- (void)cancelPeripheralConnection:(CBPeripheral *)peripheral{
+    [self.centralManager cancelPeripheralConnection:peripheral];
+}
+
+#pragma mark 开始连接
+- (void)connectDeviceWithPeripheral:(CBPeripheral *)peripheral{
+    [self.centralManager connectPeripheral:peripheral options:nil];
+}
+
 #pragma mark 保存之前连接的设备
 - (NSUserDefaults *)saveDeviceUuid:(NSString *)uuid{
     NSUserDefaults *userinfo = [NSUserDefaults standardUserDefaults];
@@ -193,20 +207,6 @@ static CoreBluetoothManage *__coreBluetoothManage;
     NSUserDefaults *userinfo = [NSUserDefaults standardUserDefaults];
     NSString *dev = [userinfo objectForKey:@"CONNECTION_DEV"];
     return dev;
-}
-
-#pragma mark 开始连接
-- (void)connectDeviceWithPeripheral:(CBPeripheral *)peripheral{
-    [self.centralManager connectPeripheral:peripheral options:nil];
-}
-
-#pragma mark 取消连接蓝牙
-- (void)cancelPeripheralConnection:(CBPeripheral *)peripheral{
-    [self.centralManager cancelPeripheralConnection:peripheral];
-}
-#pragma mark 停止扫描
-- (void)stopScanBluetooth{
-    [self.centralManager stopScan];
 }
 
 @end

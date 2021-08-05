@@ -23,7 +23,10 @@
     
     self.view.backgroundColor = [UIColor redColor];
     
+    
+    [CoreBluetoothManage sharedManage];
     [CoreBluetoothManage sharedManage].delegate = self;
+    
     
     self.textView = [[UITextView alloc]initWithFrame:CGRectMake(10, self.view.frame.origin.y + self.view.frame.size.height/2 + 10, self.view.frame.size.width / 2, self.view.frame.size.height/2 - 20)];
     self.textView.backgroundColor = [UIColor orangeColor];
@@ -83,6 +86,7 @@
 }
 
 - (void)devDidConnectPeripheral:(nonnull CBPeripheral *)peripheral {
+    NSLog(@"连接到名称为（%@）的设备-成功",peripheral.name);
     [SVProgressHUD showSuccessWithStatus:@"设备连接成功！"];
 }
 
