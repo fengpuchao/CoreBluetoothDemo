@@ -68,6 +68,7 @@
     self.textView.text = str;
 }
 
+#pragma CoreBluetoothManageDelegate
 - (void)pushDevInfo{
     [SVProgressHUD showSuccessWithStatus:@"数据写入成功,请在调试工具查看。"];
 }
