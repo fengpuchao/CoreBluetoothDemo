@@ -6,6 +6,7 @@
 //
 
 #import "CoreBluetoothManage.h"
+
 @interface CoreBluetoothManage ()<CBCentralManagerDelegate,CBPeripheralDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *deviceDic;
@@ -151,6 +152,8 @@ static CoreBluetoothManage *__coreBluetoothManage;
 
 #pragma mark 搜索扫描外围设备
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
+    self.state = central.state;
+    
     switch (central.state) {
         case CBCentralManagerStateUnknown:
             NSLog(@">>>未知状态");
