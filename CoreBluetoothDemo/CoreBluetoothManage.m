@@ -83,6 +83,8 @@ static CoreBluetoothManage *__coreBluetoothManage;
 
 #pragma mark 连接失败
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    [self.centralManager scanForPeripheralsWithServices:NULL options:NULL]; //重新进入扫描状态
+    
     if ([self.delegate respondsToSelector:@selector(devDidFailToConnectPeripheral:error:)]) {
         [self.delegate devDidFailToConnectPeripheral:peripheral error:error];
     }
