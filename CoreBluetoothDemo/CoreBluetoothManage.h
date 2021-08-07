@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, CoreBluetoothManagerState) {
 // 连接设备成功
 - (void)devDidConnectPeripheral:(CBPeripheral *)peripheral;
 // 获取设备发送的指令
-- (void)getPeripheral:(NSData *)value;
+- (void)getPeripheral:(NSData *)data;
 // 给设备发送指令
 - (void)pushDevInfo;
 // 连接断开
