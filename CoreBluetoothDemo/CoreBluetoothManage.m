@@ -40,21 +40,18 @@ static CoreBluetoothManage *__coreBluetoothManage;
     return self;
 }
 
-#pragma mark - 获取值
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
     if ([self.delegate respondsToSelector:@selector(getPeripheral:)]) {
         [self.delegate getPeripheral:characteristic.value];
     }
 }
 
-#pragma mark 数据写入成功回调
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
     if ([self.delegate respondsToSelector:@selector(pushDevInfo)]) {
         [self.delegate pushDevInfo];
     }
 }
 
-#pragma mark 数据写入
 - (void)writeDataInfo:(NSString *)info{
     __weak typeof(self)weakSelf = self;
     [self.characteristicArray enumerateObjectsUsingBlock:^(CBCharacteristic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -63,7 +60,6 @@ static CoreBluetoothManage *__coreBluetoothManage;
     }];
 }
 
-#pragma mark 发现特征回调
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
     self.peripheral = peripheral;
     [service.characteristics enumerateObjectsUsingBlock:^(CBCharacteristic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -73,7 +69,6 @@ static CoreBluetoothManage *__coreBluetoothManage;
     [self.characteristicArray addObjectsFromArray:service.characteristics];
 }
 
-#pragma mark 发现服务回调
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
     [peripheral.services enumerateObjectsUsingBlock:^(CBService * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj) {
@@ -82,30 +77,24 @@ static CoreBluetoothManage *__coreBluetoothManage;
     }];
 }
 
-#pragma mark 连接失败
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
-    [self.centralManager scanForPeripheralsWithServices:NULL options:NULL]; //重新进入扫描状态
-    
+    [self.centralManager scanForPeripheralsWithServices:NULL options:NULL];
     if ([self.delegate respondsToSelector:@selector(devDidFailToConnectPeripheral:error:)]) {
         [self.delegate devDidFailToConnectPeripheral:peripheral error:error];
     }
 }
 
-#pragma mark 设备连接断开
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
     [self.deviceDic removeAllObjects];
 
-    [self.centralManager scanForPeripheralsWithServices:NULL options:NULL]; //重新进入扫描状态
+    [self.centralManager scanForPeripheralsWithServices:NULL options:NULL];
     
     if ([self.delegate respondsToSelector:@selector(devDidDisconnectPeripheral:error:)]) {
         [self.delegate devDidDisconnectPeripheral:peripheral error:error];
     }
 }
 
-#pragma mark 连接外设--成功
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral{
-    [self saveDeviceUuid:[NSString stringWithFormat:@"%@", peripheral.identifier]]; //保存连接过的设备
-    
     [central stopScan];
 
     [peripheral discoverServices:NULL];
@@ -115,16 +104,8 @@ static CoreBluetoothManage *__coreBluetoothManage;
     }
 }
 
-#pragma mark 发现外设
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI{
-    
     peripheral.delegate = self;
-    
-    if ([self getDevicePeripheral].length != 0 && [[self getDevicePeripheral]isEqual:[NSString stringWithFormat:@"%@",peripheral.identifier]]) { //连接之前设备信息
-        [self connectDeviceWithPeripheral:peripheral];
-        [self stopScanBluetooth];
-    }
-
     if (![self.deviceDic objectForKey:[peripheral name]]) {
         if (peripheral != nil) {
             if ([peripheral name] != nil) {
@@ -142,35 +123,26 @@ static CoreBluetoothManage *__coreBluetoothManage;
                 if ([self.delegate respondsToSelector:@selector(devCoreBluetoothLists:)]) {
                     [self.delegate devCoreBluetoothLists:array];
                 }
-                 // 停止扫描, 看需求决定要不要加
-//               [_centralManager stopScan];
             }
         }
     }
 }
 
-#pragma mark 搜索扫描外围设备
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
     self.state = central.state;
     
     switch (central.state) {
         case CBCentralManagerStateUnknown:
-            NSLog(@">>>未知状态");
             break;
         case CBCentralManagerStateResetting:
-            NSLog(@">>>重置");
             break;
         case CBCentralManagerStateUnsupported:
-            NSLog(@">>>不支持");
             break;
         case CBCentralManagerStateUnauthorized:
-            NSLog(@">>>授权");
             break;
         case CBCentralManagerStatePoweredOff:
-            NSLog(@">>>蓝牙未开启");
             break;
         case CBCentralManagerStatePoweredOn:{
-            NSLog(@">>>开始扫描。");
             [self.centralManager scanForPeripheralsWithServices:NULL options:NULL];
         }
             break;
@@ -192,21 +164,6 @@ static CoreBluetoothManage *__coreBluetoothManage;
 #pragma mark 开始连接
 - (void)connectDeviceWithPeripheral:(CBPeripheral *)peripheral{
     [self.centralManager connectPeripheral:peripheral options:nil];
-}
-
-#pragma mark 保存之前连接的设备
-- (NSUserDefaults *)saveDeviceUuid:(NSString *)uuid{
-    NSUserDefaults *userinfo = [NSUserDefaults standardUserDefaults];
-    [userinfo setObject:uuid forKey:@"CONNECTION_DEV"];
-    [userinfo synchronize];
-    return  userinfo;
-}
-
-#pragma mark 获取之前连接过的设备
-- (NSString *)getDevicePeripheral{
-    NSUserDefaults *userinfo = [NSUserDefaults standardUserDefaults];
-    NSString *dev = [userinfo objectForKey:@"CONNECTION_DEV"];
-    return dev;
 }
 
 @end

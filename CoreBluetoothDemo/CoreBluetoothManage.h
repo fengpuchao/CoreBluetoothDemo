@@ -20,17 +20,12 @@ typedef NS_ENUM(NSInteger, CoreBluetoothManagerState) {
 };
 
 @protocol CoreBluetoothManageDelegate <NSObject>
-// 获取扫描列表
+
 - (void)devCoreBluetoothLists:(NSMutableArray *)devArray;
-// 连接设备成功
 - (void)devDidConnectPeripheral:(CBPeripheral *)peripheral;
-// 获取设备发送的指令
 - (void)getPeripheral:(NSData *)data;
-// 给设备发送指令
 - (void)pushDevInfo;
-// 连接断开
 - (void)devDidDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
-// 连接失败
 - (void)devDidFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
 
 @end
@@ -41,15 +36,11 @@ typedef NS_ENUM(NSInteger, CoreBluetoothManagerState) {
 
 @property (nonatomic, weak) id<CoreBluetoothManageDelegate>delegate;
 
-+ (instancetype)sharedManage; //初始化
++ (instancetype)sharedManage;
 
-// 连接设备
 - (void)connectDeviceWithPeripheral:(CBPeripheral *)peripheral;
-// 取消连接
 - (void)cancelPeripheralConnection:(CBPeripheral *)peripheral;
-// 停止扫描
 - (void)stopScanBluetooth;
-// 写入数据
 - (void)writeDataInfo:(NSString *)info;
 
 @end

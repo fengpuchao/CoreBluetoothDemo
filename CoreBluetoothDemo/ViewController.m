@@ -13,7 +13,10 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UITextView *textView;
+
+@property (nonatomic, strong) NSMutableArray *instructionArray;
 @property (nonatomic, strong) NSMutableSet *valueSet;
+@property (nonatomic, assign) bool isEnd;
 
 @end
 
@@ -25,6 +28,7 @@
     self.view.backgroundColor = [UIColor redColor];
 
     self.valueSet = [NSMutableSet set];
+    self.instructionArray = [NSMutableArray array];
 
     [CoreBluetoothManage sharedManage];
     [CoreBluetoothManage sharedManage].delegate = self;
@@ -44,68 +48,6 @@
     [self.view addSubview:self.tableView];
 }
 
-- (void)test:(NSArray *)array{
-    NSString *dataStr = [array componentsJoinedByString:@""];
-    NSArray *key_arr = @[@"0x5a 0xa5"];// 存放的指令
-    NSMutableArray *value_Array = [NSMutableArray array];// 拿到最后的结果
-    NSMutableArray *indexArray = [NSMutableArray arrayWithObject:[NSNumber numberWithInteger:dataStr.length]]; // 存放存在的每个指令下标____先添加整个字符串长度
-    
-    [key_arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([dataStr containsString:obj]) {
-            [indexArray addObjectsFromArray:[self getRangeStr:dataStr findText:obj]];
-        }
-    }];
-    
-    [indexArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        return [obj1 intValue] > [obj2 intValue];
-    }];
-            
-    [indexArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx + 1 < indexArray.count) {
-            NSInteger index = [indexArray[idx + 1]integerValue] - [obj integerValue];
-            NSString *value = [dataStr substringWithRange:NSMakeRange([obj integerValue],index)];
-            [value_Array addObject:value];
-        }
-    }];
-    NSLog(@"最终取得的数据:%@",value_Array);
-}
-
-#pragma mark - 获取这个字符串中的所有对象的所在的index
-- (NSMutableArray *)getRangeStr:(NSString *)text findText:(NSString *)findText{
-    NSMutableArray *arrayRanges = [NSMutableArray arrayWithCapacity:3];
-    if (findText == nil && [findText isEqualToString:@""]){
-        return nil;
-    }
-    
-    NSRange rang = [text rangeOfString:findText]; //获取第一次出现的range
-    if (rang.location != NSNotFound && rang.length != 0){
-        [arrayRanges addObject:[NSNumber numberWithInteger:rang.location]];//将第一次的加入到数组中
-        NSRange rang1 = {0,0};
-        NSInteger location = 0;
-        NSInteger length = 0;
-        
-        for (int i = 0;; i++){
-            if (0 == i){
-                location = rang.location + rang.length;
-                length = text.length - rang.location - rang.length;
-                rang1 = NSMakeRange(location, length);
-            }else{
-                location = rang1.location + rang1.length;
-                length = text.length - rang1.location - rang1.length;
-                rang1 = NSMakeRange(location, length);
-            }
-            //在一个range范围内查找另一个字符串的range
-            rang1 = [text rangeOfString:findText options:NSCaseInsensitiveSearch range:rang1];
-            if (rang1.location == NSNotFound && rang1.length == 0){
-                break;
-            }else//添加符合条件的location进数组
-            [arrayRanges addObject:[NSNumber numberWithInteger:rang1.location]];
-        }
-        return arrayRanges;
-    }
-    return nil;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
@@ -120,8 +62,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     CBPeripheral *peripheral = self.dataArray[indexPath.row];
      [[CoreBluetoothManage sharedManage]connectDeviceWithPeripheral:peripheral];
-    
-    NSLog(@"\n蓝牙名称:->%@\n蓝牙ID:->%@\n蓝牙状态:->%ld",peripheral.name,peripheral.identifier,(long)peripheral.state);
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -135,39 +75,12 @@
     }
     
     NSMutableArray *contArray = [NSMutableArray arrayWithObject:data];
-    NSMutableArray *instructionArray = [NSMutableArray array];
     [contArray enumerateObjectsUsingBlock:^(NSData *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *str = [[NSString alloc]initWithData:obj encoding:NSUTF8StringEncoding];
-        [instructionArray addObject:str];
-//        Byte *byte = (Byte *)[obj bytes];
-//        for(int i = 0; i < obj.length; i++){
-//            [instructionArray addObject:[NSNumber numberWithInt:byte[i]]];
-//        }
+        [self.instructionArray addObject:str];
     }];
     
-    [self.valueSet addObjectsFromArray:instructionArray];
-    
-    [self test:[self.valueSet allObjects]];
-    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-////        [self test:self.valueSet]
-//        NSLog(@"%@",self.valueSet);
-//    });
-    
-    
-//    NSMutableArray *array = [NSMutableArray array];
-//    [self.valueArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        NSString *str = [[NSString alloc] initWithData:obj encoding:NSUTF8StringEncoding];
-//        if ([str containsString:@"5A"] && [str containsString:@"A5"]) {
-//            [array addObject:str];
-//        }
-//    }];
-//
-//    NSLog(@"%@",array);
-//    NSString *str = [[NSString alloc] initWithData:obj encoding:NSUTF8StringEncoding];
-//    self.textView.text = str;
-    
+        [self.valueSet addObjectsFromArray:self.instructionArray];  
 }
 
 #pragma CoreBluetoothManageDelegate
