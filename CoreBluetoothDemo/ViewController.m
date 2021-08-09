@@ -13,88 +13,40 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, strong) NSMutableArray *valueArray;
+@property (nonatomic, strong) NSMutableSet *valueSet;
 
 @end
 
 @implementation ViewController
 
-
-//- (void)test{
-//
-//    let str = '0x5a,0xa5,0x0a,0x0a,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xa0,0x00,0xa10,0x5c,0xac,0x0a,0x00,0xa1,0x00,0xa2,0x00,0xa3,0x00,0xa4,0x00,0x5a,0xa5,0x0a,0x00,0xa5,0x00,0xa6,0x00,0xa8,0x00'
-//    let arr = ['0x5a,0xa5', '0x5c,0xac']
-//    console.log(str)
-//
-//    let indexArr = []
-//
-//    arr.forEach(item => {
-//        var index = str.indexOf(item); // 字符出现的位置
-//        var num = 0; // 这个字符出现的次数
-//        while(index !== -1) {
-//            indexArr.push(index)
-//            console.log(index); // 打印字符串出现的位置
-//            num++; // 每出现一次 次数加一
-//            index = str.indexOf(item,index + 1); // 从字符串出现的位置的下一位置开始继续查找
-//
-//        }
-//        console.log(item + '一共出现了' + num + '次');
-//    })
-//
-//    let indexSort = indexArr.sort((a,b) => a - b)
-//    indexSort.push(str.length)
-//    let strArr = []
-//    indexSort.forEach((item, index) => {
-//        if((index + 1) <  indexSort.length) {
-//            console.log(str.substring(item, indexSort[index + 1]))
-//            strArr.push(str.substring(item, indexSort[index + 1]))
-//        }
-//    })
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self test];
+    self.view.backgroundColor = [UIColor redColor];
 
-//    self.view.backgroundColor = [UIColor redColor];
-//
-//    self.valueArray = [NSMutableArray array];
-//
-//    [CoreBluetoothManage sharedManage];
-//    [CoreBluetoothManage sharedManage].delegate = self;
-//
-//
-//    self.textView = [[UITextView alloc]initWithFrame:CGRectMake(10, self.view.frame.origin.y + self.view.frame.size.height/2 + 10, self.view.frame.size.width / 2, self.view.frame.size.height/2 - 20)];
-//    self.textView.backgroundColor = [UIColor orangeColor];
-//    self.textView.editable = false;
-//    [self.view addSubview:self.textView];
-//
-//    self.dataArray = [NSMutableArray array];
-//
-//    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, (self.view.frame.origin.y + self.view.frame.size.height / 2) - (self.view.frame.size.height/2), self.view.frame.size.width,self.view.frame.size.height/2) style:UITableViewStylePlain];
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellForRowAtIndexPath"];
-//    self.tableView.delegate = self;
-//    self.tableView.dataSource = self;
-//    self.tableView.tableFooterView = [[UIView alloc]init];
-//    [self.view addSubview:self.tableView];
+    self.valueSet = [NSMutableSet set];
+
+    [CoreBluetoothManage sharedManage];
+    [CoreBluetoothManage sharedManage].delegate = self;
+
+    self.textView = [[UITextView alloc]initWithFrame:CGRectMake(10, self.view.frame.origin.y + self.view.frame.size.height/2 + 10, self.view.frame.size.width / 2, self.view.frame.size.height/2 - 20)];
+    self.textView.backgroundColor = [UIColor orangeColor];
+    self.textView.editable = false;
+    [self.view addSubview:self.textView];
+
+    self.dataArray = [NSMutableArray array];
+
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, (self.view.frame.origin.y + self.view.frame.size.height / 2) - (self.view.frame.size.height/2), self.view.frame.size.width,self.view.frame.size.height/2) style:UITableViewStylePlain];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellForRowAtIndexPath"];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [[UIView alloc]init];
+    [self.view addSubview:self.tableView];
 }
 
-- (void)test{
-    
-    NSArray *contArray = @[@"0x5a", @"0xa5", @"0x0a", @"0x0a", @"0x999900",
-                           @"0x5a", @"0xa5", @"0x0a", @"0x0a", @"0x01", @"0x02",
-                           @"0x5a", @"0xa1", @"0x02", @"0x03", @"0x04"];
-    NSMutableArray *newContArrayStr = [NSMutableArray array];
-    [contArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [newContArrayStr addObject:obj];
-    }];
-   
-    NSString *dataStr = [newContArrayStr componentsJoinedByString:@""];
-
-    NSArray *key_arr = @[@"0x5a0xa5",
-                         @"0x5a0xa1",
-                         @"0x5a0x21"];// 存放的指令
+- (void)test:(NSArray *)array{
+    NSString *dataStr = [array componentsJoinedByString:@""];
+    NSArray *key_arr = @[@"0x5a 0xa5"];// 存放的指令
     NSMutableArray *value_Array = [NSMutableArray array];// 拿到最后的结果
     NSMutableArray *indexArray = [NSMutableArray arrayWithObject:[NSNumber numberWithInteger:dataStr.length]]; // 存放存在的每个指令下标____先添加整个字符串长度
     
@@ -115,7 +67,6 @@
             [value_Array addObject:value];
         }
     }];
-    
     NSLog(@"最终取得的数据:%@",value_Array);
 }
 
@@ -155,9 +106,6 @@
     return nil;
 }
 
-
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
@@ -182,43 +130,31 @@
 }
 
 - (void)getPeripheral:(NSData *)data{
-//    [self.valueArray addObject:data];
-    
-//    NSMutableArray *contArray = [NSMutableArray array];
-//    [self.valueArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//      NSString *cont =  [[NSString alloc] initWithData:obj encoding:NSUTF8StringEncoding];
-//        [contArray addObject:cont];
-//    }];
-
-    
-    NSArray *contArray = @[@0x5a, @0xa5, @0x0a, @0x0a, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0,
-                           @0x00,
-                           
-                           @0x5c, @0xac, @0x0a, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0, @0x00,
-                           @0xa0, @0x00,
-                           
-                           @0x5c, @0xaa, @0x0a, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0, @0x00,
-                           @0xa0, @0x00,
-                           
-                           @0x5a, @0xa5, @0x0a, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0,
-                           @0x00, @0xa0, @0x00,
-                           
-                           @0x5a, @0xa5, @0x0a, @0x00, @0xa0, @0x00, @0xa0, @0x00, @0xa0, @0x00,
-                           @0xa0, @0x00, @0xa0, @0x00];
-    NSMutableArray *token = [NSMutableArray array];
-    for (int i = 0; i < contArray.count;) {
-        if ([contArray[i] isEqual: @0x5a] && [contArray[i + 1] isEqual: @0xa5]) {
-            int len = [contArray[i + 2] intValue] + 4;
-            for(int j = 0; j < len; j++) {
-                [token addObject: contArray[j + i]];
-            }
-            NSLog(@"%@",token);
-            i += len;
-            [token removeAllObjects];
-        }else{
-            i ++;
-        }
+    if (self.valueSet.count != 0) {
+        [self.valueSet removeAllObjects];
     }
+    
+    NSMutableArray *contArray = [NSMutableArray arrayWithObject:data];
+    NSMutableArray *instructionArray = [NSMutableArray array];
+    [contArray enumerateObjectsUsingBlock:^(NSData *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *str = [[NSString alloc]initWithData:obj encoding:NSUTF8StringEncoding];
+        [instructionArray addObject:str];
+//        Byte *byte = (Byte *)[obj bytes];
+//        for(int i = 0; i < obj.length; i++){
+//            [instructionArray addObject:[NSNumber numberWithInt:byte[i]]];
+//        }
+    }];
+    
+    [self.valueSet addObjectsFromArray:instructionArray];
+    
+    [self test:[self.valueSet allObjects]];
+    
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+////        [self test:self.valueSet]
+//        NSLog(@"%@",self.valueSet);
+//    });
+    
     
 //    NSMutableArray *array = [NSMutableArray array];
 //    [self.valueArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
