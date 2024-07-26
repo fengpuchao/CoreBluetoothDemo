@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281D86590416E31B3E71E89D /* Pods_CoreBluetoothDemo_CoreBluetoothDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02651739094C391DE3BEA99 /* Pods_CoreBluetoothDemo_CoreBluetoothDemoUITests.framework */; };
+		8494A757BBAFF47A20345EB0 /* Pods_CoreBluetoothDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F022EF8B0F36B2FE9E548723 /* Pods_CoreBluetoothDemoTests.framework */; };
 		EC27D22A26B3EB9D008FC526 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC27D22926B3EB9D008FC526 /* AppDelegate.m */; };
 		EC27D23026B3EB9D008FC526 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC27D22F26B3EB9D008FC526 /* ViewController.m */; };
 		EC27D23326B3EB9D008FC526 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC27D23126B3EB9D008FC526 /* Main.storyboard */; };
@@ -21,6 +23,7 @@
 		ECBC790526B8DE9D00B80061 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC78FF26B8DE9D00B80061 /* SVProgressHUD.m */; };
 		ECBC790626B8DE9D00B80061 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC790026B8DE9D00B80061 /* SVIndefiniteAnimatedView.m */; };
 		ECBC790726B8DE9D00B80061 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ECBC790126B8DE9D00B80061 /* SVProgressHUD.bundle */; };
+		EE6CFFD1D7B6B7BBAB24C96E /* Pods_CoreBluetoothDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B62564B1D2FF2BE69E022A /* Pods_CoreBluetoothDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		204F6729AC93FDC949D54C51 /* Pods-CoreBluetoothDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreBluetoothDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-CoreBluetoothDemoTests/Pods-CoreBluetoothDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		57B62564B1D2FF2BE69E022A /* Pods_CoreBluetoothDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreBluetoothDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2ADB3C6D8E2206E3A8E6A43 /* Pods-CoreBluetoothDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreBluetoothDemo.release.xcconfig"; path = "Target Support Files/Pods-CoreBluetoothDemo/Pods-CoreBluetoothDemo.release.xcconfig"; sourceTree = "<group>"; };
+		AE20F424475271649E6EB005 /* Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests/Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C02651739094C391DE3BEA99 /* Pods_CoreBluetoothDemo_CoreBluetoothDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreBluetoothDemo_CoreBluetoothDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C41A470DD9D72CEE2A35C982 /* Pods-CoreBluetoothDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreBluetoothDemoTests.release.xcconfig"; path = "Target Support Files/Pods-CoreBluetoothDemoTests/Pods-CoreBluetoothDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		D9129A7FF11CE1583D286B2B /* Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.release.xcconfig"; path = "Target Support Files/Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests/Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E459BD9AFE70CC0F8A9911AF /* Pods-CoreBluetoothDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreBluetoothDemo.debug.xcconfig"; path = "Target Support Files/Pods-CoreBluetoothDemo/Pods-CoreBluetoothDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		EC27D22526B3EB9D008FC526 /* CoreBluetoothDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreBluetoothDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC27D22826B3EB9D008FC526 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EC27D22926B3EB9D008FC526 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -69,6 +80,7 @@
 		ECBC790026B8DE9D00B80061 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		ECBC790126B8DE9D00B80061 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		ECBC790226B8DE9D00B80061 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		F022EF8B0F36B2FE9E548723 /* Pods_CoreBluetoothDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreBluetoothDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE6CFFD1D7B6B7BBAB24C96E /* Pods_CoreBluetoothDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8494A757BBAFF47A20345EB0 /* Pods_CoreBluetoothDemoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,12 +104,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				281D86590416E31B3E71E89D /* Pods_CoreBluetoothDemo_CoreBluetoothDemoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C3174DD3586BF76463B41CB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E459BD9AFE70CC0F8A9911AF /* Pods-CoreBluetoothDemo.debug.xcconfig */,
+				A2ADB3C6D8E2206E3A8E6A43 /* Pods-CoreBluetoothDemo.release.xcconfig */,
+				AE20F424475271649E6EB005 /* Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.debug.xcconfig */,
+				D9129A7FF11CE1583D286B2B /* Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.release.xcconfig */,
+				204F6729AC93FDC949D54C51 /* Pods-CoreBluetoothDemoTests.debug.xcconfig */,
+				C41A470DD9D72CEE2A35C982 /* Pods-CoreBluetoothDemoTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B4DF8E6708F628AE7372068D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57B62564B1D2FF2BE69E022A /* Pods_CoreBluetoothDemo.framework */,
+				C02651739094C391DE3BEA99 /* Pods_CoreBluetoothDemo_CoreBluetoothDemoUITests.framework */,
+				F022EF8B0F36B2FE9E548723 /* Pods_CoreBluetoothDemoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EC27D21C26B3EB9D008FC526 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +142,8 @@
 				EC27D24326B3EBA1008FC526 /* CoreBluetoothDemoTests */,
 				EC27D24E26B3EBA1008FC526 /* CoreBluetoothDemoUITests */,
 				EC27D22626B3EB9D008FC526 /* Products */,
+				8C3174DD3586BF76463B41CB /* Pods */,
+				B4DF8E6708F628AE7372068D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,6 +218,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC27D25426B3EBA1008FC526 /* Build configuration list for PBXNativeTarget "CoreBluetoothDemo" */;
 			buildPhases = (
+				A2D852DBC50D32AA5FD0C472 /* [CP] Check Pods Manifest.lock */,
 				EC27D22126B3EB9D008FC526 /* Sources */,
 				EC27D22226B3EB9D008FC526 /* Frameworks */,
 				EC27D22326B3EB9D008FC526 /* Resources */,
@@ -194,6 +236,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC27D25726B3EBA1008FC526 /* Build configuration list for PBXNativeTarget "CoreBluetoothDemoTests" */;
 			buildPhases = (
+				6D6DD6632B4C2F514ADADAD6 /* [CP] Check Pods Manifest.lock */,
 				EC27D23C26B3EBA1008FC526 /* Sources */,
 				EC27D23D26B3EBA1008FC526 /* Frameworks */,
 				EC27D23E26B3EBA1008FC526 /* Resources */,
@@ -212,6 +255,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC27D25A26B3EBA1008FC526 /* Build configuration list for PBXNativeTarget "CoreBluetoothDemoUITests" */;
 			buildPhases = (
+				F848E45DDD202794F0D542A1 /* [CP] Check Pods Manifest.lock */,
 				EC27D24726B3EBA1008FC526 /* Sources */,
 				EC27D24826B3EBA1008FC526 /* Frameworks */,
 				EC27D24926B3EBA1008FC526 /* Resources */,
@@ -294,6 +338,75 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6D6DD6632B4C2F514ADADAD6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoreBluetoothDemoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2D852DBC50D32AA5FD0C472 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoreBluetoothDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F848E45DDD202794F0D542A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EC27D22126B3EB9D008FC526 /* Sources */ = {
@@ -476,6 +589,7 @@
 		};
 		EC27D25526B3EBA1008FC526 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E459BD9AFE70CC0F8A9911AF /* Pods-CoreBluetoothDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -495,6 +609,7 @@
 		};
 		EC27D25626B3EBA1008FC526 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2ADB3C6D8E2206E3A8E6A43 /* Pods-CoreBluetoothDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -514,6 +629,7 @@
 		};
 		EC27D25826B3EBA1008FC526 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 204F6729AC93FDC949D54C51 /* Pods-CoreBluetoothDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -534,6 +650,7 @@
 		};
 		EC27D25926B3EBA1008FC526 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C41A470DD9D72CEE2A35C982 /* Pods-CoreBluetoothDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -554,6 +671,7 @@
 		};
 		EC27D25B26B3EBA1008FC526 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE20F424475271649E6EB005 /* Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G2BCUMQBM;
@@ -572,6 +690,7 @@
 		};
 		EC27D25C26B3EBA1008FC526 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9129A7FF11CE1583D286B2B /* Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G2BCUMQBM;

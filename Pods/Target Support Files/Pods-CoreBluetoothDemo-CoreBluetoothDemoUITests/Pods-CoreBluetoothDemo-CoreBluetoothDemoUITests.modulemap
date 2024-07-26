@@ -1,0 +1,6 @@
+framework module Pods_CoreBluetoothDemo_CoreBluetoothDemoUITests {
+  umbrella header "Pods-CoreBluetoothDemo-CoreBluetoothDemoUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
